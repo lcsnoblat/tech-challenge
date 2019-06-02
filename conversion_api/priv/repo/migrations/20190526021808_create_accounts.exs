@@ -8,6 +8,5 @@ defmodule ConversionApi.Repo.Migrations.CreateAccounts do
 
       timestamps()
     end
-
   end
 end

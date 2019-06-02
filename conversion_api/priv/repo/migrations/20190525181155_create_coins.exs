@@ -8,6 +8,5 @@ defmodule ConversionApi.Repo.Migrations.CreateCoins do
 
       timestamps()
     end
-
   end
 end

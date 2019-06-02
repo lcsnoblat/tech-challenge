@@ -11,9 +11,11 @@ defmodule ConversionApiWeb.AccountView do
   end
 
   def render("account.json", %{account: account, transfered_value: transfered_value}) do
-    %{id: account.id,
+    %{
+      id: account.id,
       name: account.name,
       new_balance: account.balance,
-      transfered_value: transfered_value}
+      transfered_value: transfered_value
+    }
   end
 end
