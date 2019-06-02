@@ -13,10 +13,10 @@ defmodule ConversionApiWeb.CoinsController do
   end
 
   def convert(conn, %{"base" => base, "target" => target, "amount" => amount}) do
-    with {:ok, %Coins{} = coins} <- CoinService.convert(base, target, amount) do
+    with {:ok, converted_value} <- CoinService.convert(base, target, amount) do
       conn
       |> put_status(200)
-      |> render("coins.json", coins: coins)
+      |> render("coins.json", %{converted_value: converted_value, amount: amount})
     end
   end
 

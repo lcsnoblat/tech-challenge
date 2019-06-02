@@ -10,7 +10,7 @@ defmodule ConversionApiWeb.CoinsView do
     %{data: render_one(coins, CoinsView, "coins.json")}
   end
 
-  def render("coins.json", %{coins: coins}) do
-    %{id: coins.id, name: coins.name, rate: coins.rate}
+  def render("coins.json", %{converted_value: converted_value, amount: amount}) do
+    %{converted_value: converted_value, amount: amount}
   end
 end

@@ -3,23 +3,31 @@ defmodule ConversionApiWeb.CoinService do
   alias ConversionApi.Transfer.Account
 
   def convert(base, currency, amount) do
-    rates = get_rates_for_base_currency(base)
-    IO.puts(rates)
+    with {:ok, rates} = response <- get_rates_for_base_currency(base, currency), 
+         {:ok, returned_value} = converted_value <- convert_currency(rates, amount, currency) do
+      {:ok, returned_value}
+    end
   end
 
+  def get_rates_for_base_currency(base, currency) do
+  	url = "https://api.exchangeratesapi.io/latest?base=" <> base <> "&symbols=" <> currency
 
-  def get_rates_for_base_currency(base) do
-  	url = "https://api.exchangeratesapi.io/latest?base=" <> base
+  	case HTTPoison.get(url) do
+  	  {:ok, %{status_code: 200, body: body}} ->
+        {:ok, Poison.decode!(body)}
+        |> IO.inspect()
 
-	case HTTPoison.get(url) do
-	  {:ok, %{status_code: 200, body: body}} ->
-	    Poison.decode!(body)
+  	  {:ok, %{status_code: 404}} ->
+        {:error, "Moeda informada não existe!"}
 
-	  {:ok, %{status_code: 404}} ->
-	    {error:, "Url inválida"}
+  	  {:error, %{reason: reason}} -> 
+  	    {:error, "Ocorreu um erro ao processar o request: " <> reason}
+  	end
+  end
 
-	  {:error, %{reason: reason}} ->
-	    {error:, "Ocorreu um erro ao processar o request: " <> reason}
-	end
+  def convert_currency(%{"rates" => rates},_,_) when is_nil(rates), do: {:error, "Error ao receber valores de conversão da API"}
+
+  def convert_currency(rates, amount, currency) do
+    {:ok, amount * rates["rates"][currency]}
   end
 end
