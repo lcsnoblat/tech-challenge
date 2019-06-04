@@ -19,8 +19,11 @@ erl_crash.dump
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
 
-/node_modules
+assets/
 
 *.beam
 
+/priv
+
 *.elixir_ls
+node_modules/
