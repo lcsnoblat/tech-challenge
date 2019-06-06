@@ -2,10 +2,11 @@ use Mix.Config
 
 # Configure your database
 config :conversion_api, ConversionApi.Repo,
-  username: "kszkuyzz",
-  password: "sBcYxr-eBDmJoFuLEwKNm0K_w03hWyKe",
-  database: "kszkuyzz",
-  hostname: "raja.db.elephantsql.com",
+  username: "rrztkexe",
+  password: "j1ftYmxorHRcChhJH7cKgRanAHhPDr2q",
+  database: "rrztkexe",
+  hostname: "isilo.db.elephantsql.com",
+  pool_size: 5,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
