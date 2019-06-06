@@ -10,7 +10,8 @@ defmodule ConversionApi.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -42,7 +43,8 @@ defmodule ConversionApi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.4"},
-      {:poison, "~> 2.0"}
+      {:poison, "~> 2.0"},
+      {:excoveralls, github: "parroty/excoveralls"}
     ]
   end
 
@@ -54,7 +56,7 @@ defmodule ConversionApi.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs", "run run priv/repo/seeds/account_seeds.exs", "run run priv/repo/seeds/coin_seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
