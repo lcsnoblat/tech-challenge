@@ -2,12 +2,12 @@ use Mix.Config
 
 # Configure your database
 config :conversion_api, ConversionApi.Repo,
-  username: "conv",
-  password: "conv",
-  database: "conversion_api",
-  hostname: "localhost",
+  username: "kszkuyzz",
+  password: "sBcYxr-eBDmJoFuLEwKNm0K_w03hWyKe",
+  database: "kszkuyzz",
+  hostname: "raja.db.elephantsql.com",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 5
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

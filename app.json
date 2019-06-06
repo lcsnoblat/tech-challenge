@@ -1,0 +1,8 @@
+{
+  "name": "conversion_api",
+  "description": "Tech Challenge",
+  "image": "joshwlewis/docker-heroku-phoenix:latest",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
