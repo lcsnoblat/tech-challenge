@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :conversion_api, ConversionApi.Repo,
-  username: "postgres",
-  password: "postgre",
-  database: "conversion_api_test",
-  hostname: "localhost",
+  username: "kszkuyzz",
+  password: "sBcYxr-eBDmJoFuLEwKNm0K_w03hWyKe",
+  database: "kszkuyzz",
+  hostname: "raja.db.elephantsql.com",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
