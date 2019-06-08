@@ -3,7 +3,7 @@ defmodule ConversionApi.Transfer.Account do
   import Ecto.Changeset
 
   schema "accounts" do
-    field :balance, :integer
+    field :balance, :float
     field :name, :string
 
     timestamps()

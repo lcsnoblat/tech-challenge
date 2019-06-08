@@ -6,19 +6,28 @@ defmodule ConversionApiWeb.AccountService do
     account_origin = Transfer.get_account!(from_account)
     account_destiny = Transfer.get_account!(to_account)
 
-    case is_integer(value) do
-      true ->
-        origin_account_balance = subtract_balance(account_origin, value)
-        destiny_account_balance = add_balance(account_destiny, value)
-
-        updated_origin_account = Transfer.update_account(account_origin, origin_account_balance)
-        updated_origin_destiny = Transfer.update_account(account_destiny, destiny_account_balance)
-        updated_origin_account
-
-      false ->
-        {:error, "Valor inválido"}
+    with %{balance: origin_account_balance} <- subtract_balance(account_origin, value) do
+      destiny_account_balance = add_balance(account_destiny, value)
+      updated_origin_account = Transfer.update_account(account_origin, %{balance: origin_account_balance})
+      Transfer.update_account(account_destiny, destiny_account_balance)
+      updated_origin_account
     end
   end
+
+  def transfer(%{from_account: from_account, accounts: accounts, value: value}) do
+    account_origin = Transfer.get_account!(from_account)
+    with %{balance: origin_account_balance} <- subtract_balance(account_origin, value) do
+      updated_origin_account = Transfer.update_account(account_origin, %{balance: origin_account_balance})
+
+      for x <- accounts do
+        account = Transfer.get_account!(x)
+        new_balance = add_balance(account, value / length(accounts))
+        Transfer.update_account(account, new_balance)
+      end
+      updated_origin_account
+    end
+  end
+
 
   def subtract_balance(%Account{} = account_origin, value) do
     case account_origin.balance > value do

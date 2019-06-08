@@ -44,7 +44,8 @@ defmodule ConversionApi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.4"},
       {:poison, "~> 2.0"},
-      {:excoveralls, github: "parroty/excoveralls"}
+      {:excoveralls, github: "parroty/excoveralls"},
+      {:decimal, "~> 1.0"}
     ]
   end
 
@@ -56,7 +57,7 @@ defmodule ConversionApi.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs", "run run priv/repo/seeds/account_seeds.exs", "run run priv/repo/seeds/coin_seeds.exs"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs", "run priv/repo/seeds/account_seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]

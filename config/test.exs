@@ -3,9 +3,9 @@ use Mix.Config
 # Configure your database
 config :conversion_api, ConversionApi.Repo,
   username: "postgres",
-  password: "postgre",
+  password: "postgres",
   database: "conversion_api_test",
-  hostname: "localhost",
+  hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,

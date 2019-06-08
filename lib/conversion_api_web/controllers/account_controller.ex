@@ -7,11 +7,23 @@ defmodule ConversionApiWeb.AccountController do
 
   action_fallback ConversionApiWeb.FallbackController
 
+  def transfer(_conn, %{"value" => value}) when is_boolean(value), do: {:error, "Você precisa informar um valor"}
+
+  def transfer(_conn, %{"value" => value}) when not is_number(value), do: {:error, "Valor precisa ser um número"}
+
   def transfer(conn, %{"from" => from_account, "to" => to_account, "value" => value}) do
     with {:ok, %Account{} = account} <- AccountService.transfer(from_account, to_account, value) do
       conn
       |> put_status(200)
       |> render("transfer.json", %{account: account, transfered_value: value})
+    end
+  end
+
+  def transfer(conn, %{"from" => from_account, "accounts" => accounts, "value" => value}) do
+    with {:ok, %Account{} = account} <- AccountService.transfer(%{from_account: from_account, accounts: accounts, value: value}) do
+      conn
+      |> put_status(200)
+      |> render("transfer.json", %{account: account})
     end
   end
 

@@ -24,4 +24,12 @@ defmodule ConversionApiWeb.AccountView do
       transfered_value: transfered_value
     }
   end
+
+  def render("transfer.json", %{account: account}) do
+    %{
+      id: account.id,
+      name: account.name,
+      new_balance: account.balance,
+    }
+  end
 end
