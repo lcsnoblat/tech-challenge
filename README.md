@@ -1,3 +1,12 @@
+# Como instalar e iniciar o desafio
+
+O desafio foi desenvolvido utilizando o framework Phoenix para instalar e executa-lo basta apenas ter o docker instalado e executar os seguintes comandos:
+
+`docker-compose build` para copiar e compilar os arquivos para a maquina virtual já com postgress configurado.
+
+`docker-compose up` para executar a aplicação e o banco de dados junto de alguns seeds para a aplicação.
+
+
 # Tech Challenge 
 
 Bem vindo(a)! Esse é o Tech Challenge Elixir!

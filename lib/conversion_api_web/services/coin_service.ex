@@ -1,5 +1,4 @@
 defmodule ConversionApiWeb.CoinService do
-  alias Decimal, as: D
 
 
   def convert(base, currency, amount) do
@@ -27,7 +26,6 @@ defmodule ConversionApiWeb.CoinService do
   def convert_currency(%{"rates" => rates},_,_) when is_nil(rates), do: {:error, "Error ao receber valores de conversão da API"}
 
   def convert_currency(rates, amount, currency) do
-    D.set_context(%D.Context{D.get_context | rounding: :floor, precision: 4})
-    {:ok, D.mult(D.new(amount), D.new(rates["rates"][currency]))}
+    {:ok, amount * rates["rates"][currency]}
   end
 end
